@@ -892,23 +892,32 @@ namespace abstractClassAndInterface
                                                     }
                                                     else
                                                     {
-                                                        if (selectedKemampuan.getCooldownCounter() > 0)
+                                                        Robot targetBoss = bossRobots[selectedBoss - 1];
+
+                                                        if (targetBoss.Energi <= 0)
                                                         {
                                                             Console.Clear();
-                                                            Console.WriteLine($"{selectedKemampuan.Nama} is on Cooldown");
                                                             DisplayStatus(robots, bossRobots, turn);
-                                                            validTarget = true;
+                                                            Console.WriteLine($"{targetBoss.Nama} is already defeated. Choose another target.");
                                                         }
                                                         else
                                                         {
-                                                            Robot targetBoss = bossRobots[selectedBoss - 1];
-                                                            Console.Clear();
-
-                                                            robot.GunakanKemampuan(selectedKemampuan, robot, targetBoss);
-                                                            DisplayStatus(robots, bossRobots, turn);
-                                                            validTarget = true;
-                                                            validChoice2 = true;
-                                                            validChoice = true;
+                                                            if (selectedKemampuan.getCooldownCounter() > 0)
+                                                            {
+                                                                Console.Clear();
+                                                                Console.WriteLine($"{selectedKemampuan.Nama} is on Cooldown");
+                                                                DisplayStatus(robots, bossRobots, turn);
+                                                                validTarget = true;
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.Clear();
+                                                                robot.GunakanKemampuan(selectedKemampuan, robot, targetBoss);
+                                                                DisplayStatus(robots, bossRobots, turn);
+                                                                validTarget = true;
+                                                                validChoice2 = true;
+                                                                validChoice = true;
+                                                            }
                                                         }
                                                     }
                                                 }
